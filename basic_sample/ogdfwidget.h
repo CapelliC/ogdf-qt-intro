@@ -9,6 +9,7 @@
 #include <QWidget>
 #include "OgdfView.h"
 
+/* note: TBD */
 class OgdfWidget : public OgdfView
 {
     Q_OBJECT

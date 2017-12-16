@@ -45,7 +45,6 @@ SOURCES += \
     mainwindow.cpp \
     ../OgdfScene.cpp \
     ../RadialTreeLayout.cpp \
-    ../OrthogonalLayout.cpp \
     ../SugiyamaLayout.cpp \
     ../OgdfLayouts.cpp \
     ../OgdfLayout.cpp \
@@ -58,7 +57,6 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     ../RadialTreeLayout.h \
-    ../OrthogonalLayout.h \
     ../SugiyamaLayout.h \
     ../OgdfLayout.h \
     ../OgdfLayouts.h \
@@ -71,3 +69,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui
+
+DISTFILES += \
+    Screenshot.png \
+    ../README.md
