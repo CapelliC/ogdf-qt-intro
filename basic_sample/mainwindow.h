@@ -7,6 +7,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "ui_mainwindow.h"
 
 class MainWindow : public QMainWindow
 {
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+private:
+    Ui_MainWindow ui_;
 };
 
 #endif // MAINWINDOW_H

@@ -37,6 +37,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# get the ogdf-qt-intro includes
+INCLUDEPATH += ..
 
 SOURCES += \
     main.cpp \
@@ -49,7 +51,9 @@ SOURCES += \
     ../OgdfLayout.cpp \
     ../OgdfView.cpp \
     ../GraphWithAttributes.cpp \
-    ../OgdfSettings.cpp
+    ../OgdfSettings.cpp \
+    TestGraph.cpp \
+    ogdfwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -61,4 +65,9 @@ HEADERS += \
     ../OgdfView.h \
     ../OgdfScene.h \
     ../GraphWithAttributes.h \
-    ../OgdfSettings.h
+    ../OgdfSettings.h \
+    TestGraph.h \
+    ogdfwidget.h
+
+FORMS += \
+    mainwindow.ui
