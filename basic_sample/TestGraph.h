@@ -13,7 +13,7 @@ class TestGraph : public GraphWithAttributes
 {
 public:
 
-    TestGraph(Color fillColor = Color::Green,
+    TestGraph(Color fillColor = Color::Name::Green,
               std::function<std::string(node)> label = [](node n) { return 'N' + std::to_string(n->index()); },
               double AllWidth = 60, double AllHeight = 50);
 };

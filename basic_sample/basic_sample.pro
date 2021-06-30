@@ -12,19 +12,19 @@ TARGET = basic_sample
 TEMPLATE = app
 
 # note: OGDF must be precompiled, here is the path of source folder
-# I assume a standard build by CMake, that left libraries in source_folder/build
 
 OGDF = ../../ogdf
 INCLUDEPATH += $$OGDF/include
 
 CONFIG(debug, debug|release) {
-    INCLUDEPATH += $$OGDF/debug/include
-    LIBS += -L $$OGDF/debug -lOGDF -lCOIN
+  OGDF_BUILD = ../../ogdf-debug
 } else {
-    DEFINES += NDEBUG
-    INCLUDEPATH += $$OGDF/build/include
-    LIBS += -L $$OGDF/build -lOGDF -lCOIN
+  OGDF_BUILD = ../../ogdf-release
+  DEFINES += NDEBUG
 }
+
+INCLUDEPATH += $$OGDF_BUILD/include
+LIBS += -L $$OGDF_BUILD -lOGDF -lCOIN
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings

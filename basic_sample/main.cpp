@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
-    QWidget *w = 0;
+    QWidget *w = nullptr;
 
     auto m = new QMainWindow;
     auto s = new QSplitter(Qt::Horizontal);

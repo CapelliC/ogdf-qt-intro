@@ -34,20 +34,20 @@ void OgdfScene::writeDashArray(QGraphicsItem* xmlNode, StrokeType lineStyle, dou
 {
     Q_UNUSED(xmlNode)
 
-    if (lineStyle != stNone && lineStyle != stSolid) {
+    if (lineStyle != StrokeType::None && lineStyle != StrokeType::Solid) {
         std::stringstream is;
 
         switch(lineStyle) {
-        case stDash:
+        case StrokeType::Dash:
             is << 4*lineWidth << "," << 2*lineWidth;
             break;
-        case stDot:
+        case StrokeType::Dot:
             is << 1*lineWidth << "," << 2*lineWidth;
             break;
-        case stDashdot:
+        case StrokeType::Dashdot:
             is << 4*lineWidth << "," << 2*lineWidth << "," << 1*lineWidth << "," << 2*lineWidth;
             break;
-        case stDashdotdot:
+        case StrokeType::Dashdotdot:
             is << 4*lineWidth << "," << 2*lineWidth << "," << 1*lineWidth << "," << 2*lineWidth << "," << 1*lineWidth << "," << 2*lineWidth;
             break;
         default:
@@ -70,24 +70,24 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
 
     // values are precomputed to save expensive sin/cos calls
     switch (m_attr.shape(v)) {
-    case shEllipse:
+    case Shape::Ellipse:
         shape = addEllipse(x, y, w, h);
         break;
-    case shTriangle:
+    case Shape::Triangle:
         shape = drawPolygon(xmlNode, {
                                 x,          y - h/2,
                                 x - w/2,    y + h/2,
                                 x + w/2,    y + h/2
                             });
         break;
-    case shInvTriangle:
+    case Shape::InvTriangle:
         shape = drawPolygon(xmlNode, {
                                 x,          y + h/2,
                                 x - w/2,    y - h/2,
                                 x + w/2,    y - h/2
                             });
         break;
-    case shPentagon: {
+    case Shape::Pentagon: {
         const double
                 pentagonHalfWidth = 0.475528258147577 * w,
                 pentagonSmallHeight = 0.154508497187474 * h,
@@ -102,7 +102,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                             });
     }
         break;
-    case shHexagon: {
+    case Shape::Hexagon: {
         const double
                 hexagonHalfHeight = 0.43301270189222 * h;
         shape = drawPolygon(xmlNode, {
@@ -115,7 +115,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                             });
     }
         break;
-    case shOctagon: {
+    case Shape::Octagon: {
         const double
                 octagonHalfWidth = 0.461939766255643 * w,
                 octagonSmallWidth = 0.191341716182545 * w,
@@ -134,7 +134,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                             });
     }
         break;
-    case shRhomb:
+    case Shape::Rhomb:
         shape = drawPolygon(xmlNode, {
                                 x + w/2 , y,
                                 x       , y + h/2,
@@ -142,7 +142,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                                 x       , y - h/2
                             });
         break;
-    case shTrapeze:
+    case Shape::Trapeze:
         shape = drawPolygon(xmlNode, {
                                 x - w/2, y + h/2,
                                 x + w/2, y + h/2,
@@ -150,7 +150,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                                 x - w/4, y - h/2
                             });
         break;
-    case shInvTrapeze:
+    case Shape::InvTrapeze:
         shape = drawPolygon(xmlNode, {
                                 x - w/2, y - h/2,
                                 x + w/2, y - h/2,
@@ -158,7 +158,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                                 x - w/4, y + h/2
                             });
         break;
-    case shParallelogram:
+    case Shape::Parallelogram:
         shape = drawPolygon(xmlNode, {
                                 x - w/2, y + h/2,
                                 x + w/4, y + h/2,
@@ -166,7 +166,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
                                 x - w/4, y - h/2
                             });
         break;
-    case shInvParallelogram:
+    case Shape::InvParallelogram:
         shape = drawPolygon(xmlNode, {
                                 x - w/2, y - h/2,
                                 x + w/4, y - h/2,
@@ -176,7 +176,7 @@ void OgdfScene::drawNode(QGraphicsItem* xmlNode, node v)
         break;
 
         // unsupported shapes are rendered as rectangle
-    case shRoundedRect:
+    case Shape::RoundedRect:
         //shape = addRoundedRect(x - w/2, y - h/2, w, h, w/10, h/10);
         //break;
     default:
@@ -254,8 +254,7 @@ void OgdfScene::drawNodes(QGraphicsItem* xmlNode)
             double compare(const node &v, const node &w) const {
                 return m_attr->z(v) - m_attr->z(w);
             }
-
-            OGDF_AUGMENT_COMPARER(node);
+            OGDF_AUGMENT_COMPARER(node)
         };
 
         nodes.quicksort(NodeComparer(m_attr));
@@ -297,9 +296,9 @@ void OgdfScene::drawEdges(QGraphicsItem* xmlNode)
 
 void OgdfScene::appendLineStyle(QGraphicsItem* line, edge e) {
 
-    StrokeType lineStyle = m_attr.has(GraphAttributes::edgeStyle) ? m_attr.strokeType(e) : stSolid;
+    StrokeType lineStyle = m_attr.has(GraphAttributes::edgeStyle) ? m_attr.strokeType(e) : StrokeType::Solid;
 
-    if (lineStyle != stNone) {
+    if (lineStyle != StrokeType::None) {
         if (m_attr.has(GraphAttributes::edgeStyle)) {
             /*
             line.append_attribute("stroke") = m_attr.strokeColor(e).toString().c_str();
@@ -353,15 +352,17 @@ void OgdfScene::drawEdge(QGraphicsItem* xmlNode, edge e) {
 
     if (m_attr.has(GraphAttributes::edgeArrow)) {
         switch (m_attr.arrowType(e)) {
-        case eaUndefined:
+        case EdgeArrow::Undefined:
             drawTargetArrow = m_attr.directed();
             break;
-        case eaLast:
+        case EdgeArrow::Last:
             drawTargetArrow = true;
             break;
-        case eaBoth:
+        case EdgeArrow::Both:
             drawTargetArrow = true;
-        case eaFirst:
+
+        [[clang::fallthrough]];
+        case EdgeArrow::First:
             drawSourceArrow = true;
             break;
         default:
