@@ -4,27 +4,28 @@
 #
 #-------------------------------------------------
 
-QT += core gui svg
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui svg widgets svgwidgets
 
 TARGET = basic_sample
 TEMPLATE = app
 
 # note: OGDF must be precompiled, here is the path of source folder
 
+#OGDF = C:/dev/ogdf
 OGDF = ../../ogdf
 INCLUDEPATH += $$OGDF/include
 
 CONFIG(debug, debug|release) {
-  OGDF_BUILD = ../../ogdf-debug
+  OGDF_BUILD = $$OGDF/build/debug/Debug
 } else {
-  OGDF_BUILD = ../../ogdf-release
+  OGDF_BUILD = $$OGDF/build/release
   DEFINES += NDEBUG
 }
 
 INCLUDEPATH += $$OGDF_BUILD/include
-LIBS += -L $$OGDF_BUILD -lOGDF -lCOIN
+
+#LIBPATH += $$OGDF_BUILD
+LIBS += -L$$OGDF_BUILD -lOGDF -lCOIN
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
