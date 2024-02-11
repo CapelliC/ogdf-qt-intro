@@ -288,7 +288,9 @@ void OgdfScene::drawClusters(QGraphicsItem* xmlNode)
 void OgdfScene::drawEdges(QGraphicsItem* xmlNode)
 {
     if (m_attr.has(GraphAttributes::edgeGraphics)) {
-        auto g = new QGraphicsItemGroup(xmlNode);
+        // auto g = new QGraphicsItemGroup(xmlNode);
+        QGraphicsItemGroup G(xmlNode);
+        auto g = &G;
         for (edge e : m_attr.constGraph().edges)
             drawEdge(g, e);
     }
