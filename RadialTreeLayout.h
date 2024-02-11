@@ -12,11 +12,11 @@
 class RadialTreeLayout : public OgdfLayout, public ogdf::RadialTreeLayout {
     Q_OBJECT
 
-    Q_PROPERTY(double levelDistance READ levelDistance WRITE levelDistance CONSTANT)
+    Q_PROPERTY(double levelDistance READ levelDistance CONSTANT)
     //Q_PROPERTY(double connectedComponentDistance READ connectedComponentDistance WRITE connectedComponentDistance)
 
     Q_ENUM(RootSelectionType)
-    Q_PROPERTY(RootSelectionType rootSelection READ rootSelection WRITE rootSelection CONSTANT)
+    Q_PROPERTY(RootSelectionType rootSelection READ rootSelection CONSTANT)
 
 public:
 

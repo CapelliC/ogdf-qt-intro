@@ -33,6 +33,15 @@ LIBS += -L$$OGDF_BUILD -lOGDF -lCOIN
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+# silence MSVC C4100 frequent warning (unused parameter) as suggested at
+# https://stackoverflow.com/a/52213645/874024
+
+# ogdf/fileformats/GraphIO.h(461): warning C4068: unknown pragma 'mark'
+# ogdf/basic/InducedSubgraph.h(70): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+# OgdfScene.cpp(366): warning C5030: attribute [[clang::fallthrough]] is not recognized
+QMAKE_CXXFLAGS_WARN_ON -= -w34100 -w34068 -w34244 -w35030
+QMAKE_CXXFLAGS         += -wd4100 -wd4068 -wd4244 -wd5030
+
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.

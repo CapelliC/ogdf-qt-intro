@@ -12,17 +12,17 @@
 class SugiyamaLayout : public OgdfLayout, public ogdf::SugiyamaLayout {
     Q_OBJECT
 
-    Q_PROPERTY(int fails READ fails WRITE fails CONSTANT)
-    Q_PROPERTY(int runs READ runs WRITE runs CONSTANT)
-    Q_PROPERTY(bool transpose READ transpose WRITE transpose CONSTANT)
-    Q_PROPERTY(bool arrangeCCs READ arrangeCCs WRITE arrangeCCs CONSTANT)
-    Q_PROPERTY(double minDistCC READ minDistCC WRITE minDistCC CONSTANT)
-    Q_PROPERTY(double pageRatio READ pageRatio WRITE pageRatio CONSTANT)
-    Q_PROPERTY(bool alignBaseClasses READ alignBaseClasses WRITE alignBaseClasses CONSTANT)
-    Q_PROPERTY(bool alignSiblings READ alignSiblings WRITE alignSiblings CONSTANT)
+    Q_PROPERTY(int fails READ fails CONSTANT)
+    Q_PROPERTY(int runs READ runs CONSTANT)
+    Q_PROPERTY(bool transpose READ transpose CONSTANT)
+    Q_PROPERTY(bool arrangeCCs READ arrangeCCs CONSTANT)
+    Q_PROPERTY(double minDistCC READ minDistCC CONSTANT)
+    Q_PROPERTY(double pageRatio READ pageRatio CONSTANT)
+    Q_PROPERTY(bool alignBaseClasses READ alignBaseClasses CONSTANT)
+    Q_PROPERTY(bool alignSiblings READ alignSiblings CONSTANT)
     //void setSubgraphs
-    Q_PROPERTY(bool permuteFirst READ permuteFirst WRITE permuteFirst CONSTANT)
-    Q_PROPERTY(uint maxThreads READ maxThreads WRITE maxThreads CONSTANT)
+    Q_PROPERTY(bool permuteFirst READ permuteFirst CONSTANT)
+    Q_PROPERTY(uint maxThreads READ maxThreads CONSTANT)
 
 public:
 
